@@ -23,8 +23,6 @@ export async function action({params, request}) {
 }
 
 export async function loader({params}) {
-  console.log('params ............')
-  console.log(params)
   const messages = await ky
     .get(`messages/${params.roomId}/${params.channel}`)
     .json()
@@ -39,8 +37,6 @@ export default function Room() {
   const listRef = useRef(null)
   const {messages} = useLoaderData()
   const revalidator = useRevalidator()
-
-  console.log(messages)
 
   useEffect(() => {
     const listener = echo

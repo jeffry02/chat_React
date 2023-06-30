@@ -27,8 +27,6 @@ export default function App() {
   const {user, users} = useLoaderData()
   const {channels} = useLoaderData()
 
-  console.log(user)
-
   function handleLogout() {
     localStorage.removeItem('token')
 
@@ -38,24 +36,36 @@ export default function App() {
   return (
     <AuthContext.Provider value={user}>
       <div className="flex h-screen">
-        <div className="relative flex w-[320px] flex-col border border-gray-400">
-          <div className="absolute right-0 top-[47px] h-[486px] w-[20px] border-y border-gray-400 bg-white"></div>
+        <div className="flex w-[320px] flex-col border border-gray-400">
           <h2 className="flex h-12 items-center justify-center border-b border-gray-400 text-xl font-semibold">
             Contacts
           </h2>
-          <ContactList users={users} />
+          <div className="relative">
+            <div className="h-[490px] overflow-y-scroll">
+              <div className="absolute right-0 top-0 h-full w-[20px] bg-white"></div>
+              <ContactList users={users} />
+            </div>
+          </div>
           <div className="flex h-[380px] flex-col border-b border-gray-300">
             <h2 className="flex h-12 items-center justify-center border-y border-gray-400 text-xl font-semibold">
               Channels
             </h2>
-            <ChannelList channels={channels} />
+            <div className="relative">
+              <div className="h-auto overflow-y-scroll">
+                <div className="absolute right-0 top-0 h-full w-[20px] bg-white"></div>
+                <ChannelList channels={channels} />
+              </div>
+            </div>
           </div>
           <button
             className="flex w-full items-center justify-center p-4"
             onClick={handleLogout}
             type="button"
           >
-            <span users={user.name}>{user.name} <span className='text-orange-400'>Logout</span></span>
+            <span className="text-sm font-semibold" users={user.name}>
+              {user.name}{' '}
+              <span className="text-base text-orange-500">Logout</span>
+            </span>
           </button>
         </div>
         <div className="flex flex-1 flex-col">
