@@ -38,6 +38,7 @@ export default function Room() {
   const {messages} = useLoaderData()
   const revalidator = useRevalidator()
 
+  console.log(messages)
   useEffect(() => {
     const listener = echo
       .channel('messages')
